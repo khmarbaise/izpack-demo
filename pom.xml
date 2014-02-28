@@ -58,6 +58,7 @@
 					<version>${izpack-release.version}</version>
 					<configuration>
 						<mkdirs>true</mkdirs>
+            <classifier>installer</classifier>
 					</configuration>
 				</plugin>
 			</plugins>
