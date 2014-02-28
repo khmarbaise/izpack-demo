@@ -12,6 +12,7 @@
 
   <artifactId>demo-assembly</artifactId>
   <name>IZPack Demo :: Assembly</name>
+  <packaging>izpack-jar</packaging>
 
   <build>
     <plugins>
@@ -92,7 +93,8 @@
             </goals>
             <configuration>
               <!-- base for relative paths in izpack descriptor -->
-              <baseDir>${izpack.staging}</baseDir>
+<!--               <baseDir>${izpack.staging}</baseDir> -->
+              <classifier>installer</classifier>
             </configuration>
           </execution>
         </executions>

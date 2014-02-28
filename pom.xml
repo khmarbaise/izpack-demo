@@ -58,16 +58,7 @@
 					<version>${izpack-release.version}</version>
 					<configuration>
 						<mkdirs>true</mkdirs>
-						<baseDir>${project.basedir}/src/main</baseDir>
 					</configuration>
-          <!-- Really needed, cause should be a dependency of the izpack-maven-plugin -->
-					<dependencies>
-						<dependency>
-							<groupId>org.codehaus.izpack</groupId>
-							<artifactId>izpack-compiler</artifactId>
-							<version>${izpack-release.version}</version>
-						</dependency>
-					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>
