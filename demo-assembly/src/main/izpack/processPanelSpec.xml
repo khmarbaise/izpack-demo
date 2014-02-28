@@ -1,0 +1,22 @@
+<processing>
+	<job name="run IzpackHollywood">
+		<executeclass name="com.soebes.tools.izpack.demo.IzpackOwnHolloywood">
+			<arg>processing1</arg>
+			<arg>$INSTALL_PATH</arg>
+			<arg>$INSTALL_PATH/conf/izpack.properties</arg>
+		</executeclass>
+	</job>
+	<job name="doit.bat unter Windows">
+		<os family="windows" />
+		<executefile name="$INSTALL_PATH/prg/doit.bat">
+			<arg>$INSTALL_PATH/log</arg>
+		</executefile>
+	</job>
+	<job name="doit.sh unter Linux">
+		<os family="linux" />
+		<executefile name="/bin/sh">
+			<arg>$INSTALL_PATH/prg/doit.sh</arg>
+			<arg>$INSTALL_PATH/log</arg>
+		</executefile>
+	</job>
+</processing>

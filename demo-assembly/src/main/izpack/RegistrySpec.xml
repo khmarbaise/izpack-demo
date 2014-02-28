@@ -1,0 +1,14 @@
+<registry>
+  <pack name="izpack-demo01 für Windows">
+    <key
+      keypath="$osarchregkey\SOEBES\${APP_NAME}\${APP_VER}"
+      root="HKLM">
+    </key>
+    <value
+      name="installpath"
+      keypath="$osarchregkey\SOEBES\${APP_NAME}\${APP_VER}"
+      root="HKLM"
+      string="$INSTALL_PATH">
+    </value>
+  </pack>
+</registry>

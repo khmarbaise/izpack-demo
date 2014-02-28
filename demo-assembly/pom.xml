@@ -1,0 +1,118 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.soebes.tools.izpack</groupId>
+    <artifactId>izpack-demo-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>demo-assembly</artifactId>
+  <name>IZPack Demo :: Assembly</name>
+
+  <build>
+    <plugins>
+      <!-- shouldn't be neccesary. Should be handled by izpack-maven-plugin -->
+      <!-- copy other checked resource into staging area, expected by install.xml -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>create-izpack-staging-area</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <copy todir="${izpack.staging}/izpack">
+                  <fileset dir="${basedir}/src/main/izpack" />
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <!-- The following should be handled by the izpack-maven-plugin -->
+        <artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <excludeTransitive>true</excludeTransitive>
+          <stripVersion>true</stripVersion>
+          <overWriteReleases>true</overWriteReleases>
+          <overWriteSnapshots>true</overWriteSnapshots>
+          <overWriteIfNewer>true</overWriteIfNewer>
+        </configuration>
+        <executions>
+          <execution>
+            <!-- copy *application* jars to izpack staging lib -->
+            <id>copy-product-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${izpack.staging}/lib</outputDirectory>
+              <excludeScope>system</excludeScope>
+              <!-- this excludes tools.jar, e.g. -->
+              <excludeArtifactIds>mycustompanels</excludeArtifactIds>
+              <!-- IMPORTANT: don't copy custom panels where our application jars live -->
+              <excludeGroupIds>org.codehaus.izpack</excludeGroupIds>
+              <!-- IMPORTANT: we don't want to copy the izpack dependency where our application jars live -->
+            </configuration>
+          </execution>
+          <execution>
+            <!-- copy izpack custom (custom panels, etc.) jars to izpack staging custom -->
+            <id>copy-izpack-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${izpack.staging}/custom</outputDirectory>
+              <includeArtifactIds>mycustompanels</includeArtifactIds>
+              <!-- IMPORTANT: this causes *only* our custom panels to be copied -->
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.izpack</groupId>
+        <artifactId>izpack-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>izpack</goal>
+            </goals>
+            <configuration>
+              <!-- base for relative paths in izpack descriptor -->
+              <baseDir>${izpack.staging}</baseDir>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+<!--     <dependency> -->
+<!--       <groupId>org.codehaus.izpack</groupId> -->
+<!--       <artifactId>izpack-panel</artifactId> -->
+<!--     </dependency> -->
+<!--     <dependency> -->
+<!--       <groupId>org.codehaus.izpack</groupId> -->
+<!--       <artifactId>izpack-api</artifactId> -->
+<!--     </dependency> -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>demo-install-routines</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

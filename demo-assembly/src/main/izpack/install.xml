@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<installation version="5.0">
+
+  <info>
+    <!-- The following should be taken from pom file -->
+    <appname>izpack-demo01</appname>
+    <appversion>1.0.0</appversion>
+    <javaversion>1.6</javaversion>
+    <summarylogfilepath>${INSTALL_PATH}/install_${APP_NAME}-${APP_VER}.htm</summarylogfilepath>
+  </info>
+
+  <guiprefs
+    width="640"
+    height="480"
+    resizable="yes" />
+
+  <locale>
+    <langpack iso3="deu" />
+  </locale>
+
+  <conditions>
+    <condition
+      type="java"
+      id="osfamilylinux">
+      <java>
+        <class>com.izforge.izpack.util.OsVersion</class>
+        <field>IS_LINUX</field>
+      </java>
+      <returnvalue type="boolean">true</returnvalue>
+    </condition>
+    <condition
+      type="java"
+      id="osfamilywindows">
+      <java>
+        <class>com.izforge.izpack.util.OsVersion</class>
+        <field>IS_WINDOWS</field>
+      </java>
+      <returnvalue type="boolean">true</returnvalue>
+    </condition>
+    <condition
+      type="variable"
+      id="osarch64">
+      <name>SYSTEM_sun_arch_data_model</name>
+      <value>64</value>
+    </condition>
+    <condition
+      type="variable"
+      id="osarch32">
+      <name>SYSTEM_sun_arch_data_model</name>
+      <value>32</value>
+    </condition>
+
+    <condition
+      type="variable"
+      id="windowsVista">
+      <name>SYSTEM_os_name</name>
+      <value>Windows Vista</value>
+    </condition>
+    <condition
+      type="variable"
+      id="windows7">
+      <name>SYSTEM_os_name</name>
+      <value>Windows 7</value>
+    </condition>
+    <condition
+      type="variable"
+      id="windows8">
+      <name>SYSTEM_os_name</name>
+      <value>Windows 8</value>
+    </condition>
+    <condition
+      type="variable"
+      id="windows2k12">
+      <name>SYSTEM_os_name</name>
+      <value>Windows 2012</value>
+    </condition>
+    <condition
+      type="variable"
+      id="windows2k8">
+      <name>SYSTEM_os_name</name>
+      <value>Windows Server 2008 R2</value>
+    </condition>
+    <condition
+      type="variable"
+      id="windows2k3">
+      <name>SYSTEM_os_name</name>
+      <value>Windows 2003</value>
+    </condition>
+    <condition
+      type="variable"
+      id="windowsXp">
+      <name>SYSTEM_os_name</name>
+      <value>Windows XP</value>
+    </condition>
+    <condition
+      type="variable"
+      id="linux">
+      <name>SYSTEM_os_name</name>
+      <value>Linux</value>
+    </condition>
+  </conditions>
+
+  <variables>
+    <variable
+      name="InstallerFrame.logfilePath"
+      value="${INSTALL_PATH}/install_${APP_NAME}-${APP_VER}.log" />
+  </variables>
+
+  <dynamicvariables>
+    <variable
+      name="productinstance.user.public.basepath"
+      value="${defaultbasepath}" />
+    <variable
+      name="productinstance.user.public.jrepath"
+      value="${defaultbasepath}/java/jre" />
+    <variable
+      name="productinstance.user.public.prgpath"
+      value="${defaultbasepath}/prg" />
+    <variable
+      name="productinstance.user.public.helppath"
+      value="${defaultbasepath}/help" />
+    <variable
+      name="productinstance.user.public.webhdpath"
+      value="${defaultbasepath}/webhd" />
+
+    <variable
+      name="TargetPanel.dir.windows"
+      value="${ENV[SystemDrive]}\${APP_NAME}" />
+    <variable
+      name="TargetPanel.dir.linux"
+      value="/usr/local/${APP_NAME}" />
+
+    <variable
+      name="windowsversion"
+      value="2k12"
+      condition="windows2k12" />
+    <variable
+      name="windowsversion"
+      value="2k8"
+      condition="windows2k8" />
+    <variable
+      name="windowsversion"
+      value="2k3"
+      condition="windows2k3" />
+    <variable
+      name="windowsversion"
+      value="win8"
+      condition="windows8" />
+    <variable
+      name="windowsversion"
+      value="win7"
+      condition="windows7" />
+    <variable
+      name="windowsversion"
+      value="xp"
+      condition="windowsXp" />
+    <variable
+      name="windowsversion"
+      value="vista"
+      condition="windowsVista" />
+    <variable
+      name="windowsversion"
+      value="linux"
+      condition="linux" />
+
+    <variable
+      name="osarchitecture"
+      value="64"
+      condition="osarch64" />
+    <variable
+      name="osarchitecture"
+      value="32"
+      condition="osarch32" />
+
+    <variable
+      name="osarchregkey"
+      value="SOFTWARE"
+      condition="osarch32" />
+    <variable
+      name="osarchregkey"
+      value="SOFTWARE\Wow6432Node"
+      condition="osarch64" />
+
+    <variable
+      name="osfamily"
+      value="linux"
+      condition="osfamilylinux" />
+    <variable
+      name="osfamily"
+      value="windows"
+      condition="osfamilywindows" />
+
+    <variable
+      name="defaultbasepath"
+      value="/usr/local/${APP_NAME}"
+      condition="osfamilylinux" />
+    <variable
+      name="defaultbasepath"
+      value="${ENV[SystemDrive]}\${APP_NAME}"
+      condition="osfamilywindows" />
+
+    <variable
+      name="processorarchitecture"
+      condition="osfamilywindows"
+      checkonce="true"
+      ignorefailure="false"
+      regkey="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+      regvalue="PROCESSOR_ARCHITECTURE" />
+  </dynamicvariables>
+
+  <natives>
+    <native
+      type="3rdparty"
+      name="COIOSHelper.dll"
+      stage="both">
+      <os family="windows" />
+    </native>
+    <native
+      type="3rdparty"
+      name="COIOSHelper_x64.dll"
+      stage="both">
+      <os family="windows" />
+    </native>
+  </natives>
+
+  <listeners>
+    <listener
+      installer="SummaryLoggerInstallerListener"
+      classname="SummaryLoggerInstallerListener"
+      stage="install">
+      <os family="windows" />
+    </listener>
+    <listener
+      installer="RegistryInstallerListener"
+      classname="RegistryInstallerListener"
+      stage="install">
+      <os family="windows" />
+    </listener>
+    <listener
+      installer="RegistryUninstallerListener"
+      classname="RegistryUninstallerListener"
+      stage="uninstall">
+      <os family="windows" />
+    </listener>
+  </listeners>
+
+  <resources>
+    <!-- res id="LicencePanel.licence" src="izpack/licence.txt" / -->
+    <!-- res id="InfoPanel.info" src="izpack/readme.txt" / -->
+    <res
+      id="userInputSpec.xml"
+      src="izpack/configinputspec.xml" />
+    <res
+      id="ProcessPanel.Spec.xml"
+      src="izpack/processPanelSpec.xml" />
+    <res
+      id="RegistrySpec.xml"
+      src="izpack/RegistrySpec.xml" />
+  </resources>
+
+  <panels>
+    <!-- panel classname="HelloPanel" / -->
+    <!-- panel classname="InfoPanel" / -->
+    <!-- panel classname="LicencePanel" / -->
+    <panel classname="TargetPanel" />
+    <!-- panel classname="DefaultTargetPanel" / -->
+    <!-- panel classname="UserInputPanel" id="dialogPanel1" / -->
+    <panel
+      classname="UserInputPanel"
+      id="dialogPanel2" />
+    <panel classname="PacksPanel" />
+    <panel classname="InstallPanel">
+      <actions>
+        <action
+          stage="postvalidate"
+          classname="com.soebes.tools.izpack.demo.IzpackOwnHolloywood" />
+      </actions>
+    </panel>
+    <panel classname="ProcessPanel" />
+    <!-- panel classname="FinishPanel" / -->
+    <panel classname="SimpleFinishPanel" />
+  </panels>
+
+  <jar
+    src="lib/demo-install-routines.jar"
+    stage="install" />	<!-- path is relative to izpack.baseDir as defined in pom.xml -->
+
+  <packs>
+    <pack
+      name="izpack-demo01 all Platforms"
+      required="yes">
+      <description>izpack-demo01 all Platforms</description>
+      <file
+        src="izpack/izpack-demo01.properties"
+        targetdir="$INSTALL_PATH/conf" />
+      <parsable targetfile="$INSTALL_PATH/conf/izpack.properties" />
+      <parsable targetfile="$INSTALL_PATH/conf/${APP_NAME}.properties" />
+      <!-- path is relative to izpack.baseDir as defined in pom.xml -->
+      <file
+        src="lib/demo-install-routines.jar"
+        targetdir="$INSTALL_PATH/tmp" />
+      <executable
+        targetfile="$INSTALL_PATH/tmp/demo-install-routines.jar"
+        type="jar"
+        class="com.soebes.tools.izpack.demo.IzpackOwnHolloywood"
+        stage="postinstall"
+        failure="ignore"
+        keep="false">
+        <args>
+          <arg value="unpack" />
+          <arg value="$INSTALL_PATH" />
+          <arg value="$INSTALL_PATH/conf/izpack.properties" />
+        </args>
+      </executable>
+    </pack>
+
+    <pack
+      name="izpack-demo01 für Windows"
+      required="yes">
+      <os family="windows" />
+      <description>izpack-demo01 für Windows</description>
+      <fileset
+        dir="izpack/windows"
+        targetdir="$INSTALL_PATH" />
+      <parsable targetfile="$INSTALL_PATH/prg/doit.bat" />
+    </pack>
+
+    <pack
+      name="izpack-demo01 für Linux"
+      required="yes">
+      <os family="unix" />
+      <description>izpack-demo01 für Linux</description>
+      <fileset
+        dir="izpack/linux"
+        targetdir="$INSTALL_PATH" />
+      <parsable targetfile="$INSTALL_PATH/prg/doit.sh" />
+    </pack>
+  </packs>
+
+</installation>

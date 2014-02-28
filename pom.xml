@@ -1,0 +1,80 @@
+<project
+		xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.soebes.smpp</groupId>
+    <artifactId>smpp</artifactId>
+    <version>0.6.3</version>
+  </parent>
+
+  <groupId>com.soebes.tools.izpack</groupId>
+	<artifactId>izpack-demo-parent</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>IZPack :: Root</name>
+	<scm>
+		<developerConnection>scm:git:git@github.com:khmarbaise/izpack-demo.git</developerConnection>
+		<connection>scm:git:git@github.com:khmarbaise/izpack-demo.git</connection>
+	</scm>
+
+	<properties>
+		<izpack-release.version>5.0.0-rc1</izpack-release.version>
+		<!-- izpack-maven-plugin default for baseDir: ${project.build.directory}/staging  -->
+		<izpack.staging>${project.build.directory}/staging</izpack.staging>
+		<installer.version>${project.version}</installer.version>
+		<installer.name>izpack-demo</installer.name>	<!-- will resolve to 'izpack-demo' -->
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.codehaus.izpack</groupId>
+				<artifactId>izpack-compiler</artifactId>
+				<version>${izpack-release.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.izpack</groupId>
+				<artifactId>izpack-panel</artifactId>
+				<version>${izpack-release.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.izpack</groupId>
+				<artifactId>izpack-api</artifactId>
+				<version>${izpack-release.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+  <build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.izpack</groupId>
+					<artifactId>izpack-maven-plugin</artifactId>
+					<version>${izpack-release.version}</version>
+					<configuration>
+						<mkdirs>true</mkdirs>
+						<baseDir>${project.basedir}/src/main</baseDir>
+					</configuration>
+          <!-- Really needed, cause should be a dependency of the izpack-maven-plugin -->
+					<dependencies>
+						<dependency>
+							<groupId>org.codehaus.izpack</groupId>
+							<artifactId>izpack-compiler</artifactId>
+							<version>${izpack-release.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+  </build>
+
+	<modules>
+		<module>demo-assembly</module>
+		<module>demo-install-routines</module>
+	</modules>
+</project>

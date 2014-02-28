@@ -1,0 +1,29 @@
+<userInput>
+	<panel id="dialogPanel1">
+		<field type="text" variable="productinstance.user.public.basepath">
+			<spec txt="Basisverzeichnis auf Zielsystem:" id="input.basepath" size="45" set="${defaultbasepath}" />
+			<validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Bitte wählen Sie ein Basisverzeichnis aus"/>
+		</field>
+	</panel>
+	<panel id="dialogPanel2">
+		<field type="text" variable="productinstance.user.public.jrepath">
+			<spec txt="JRE-Pfad:" id="input.jrepath" size="25" set="${defaultbasepath}/java/jre" />
+			<validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Bitte geben Sie einen JRE-Pfad an"/>
+		</field>
+		<field type="space" />
+		<field type="text" variable="productinstance.user.public.prgpath">
+			<spec txt="Datenbank-Name:" id="input.prgpath" size="25" set="${defaultbasepath}/prg" />
+			<validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Bitte geben Sie einen Programme-Pfad an"/>
+		</field>
+		<field type="space" />
+		<field type="text" variable="productinstance.user.public.helppath">
+			<spec txt="Datenbank-Server:" id="input.helppath" size="25" set="${defaultbasepath}/help" />
+			<validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Bitte geben Sie einen Hilfe-Pfad an"/>
+		</field>
+		<field type="space" />
+		<field type="text" variable="productinstance.user.public.webhdpath">
+			<spec txt="Datenbank-Port:" id="input.webhdpath" size="25" set="${defaultbasepath}/webhd" />
+			<validator class="com.izforge.izpack.panels.userinput.validator.NotEmptyValidator" txt="Bitte geben Sie einen Webhd-Pfad an"/>
+		</field>
+	</panel>
+</userInput>
