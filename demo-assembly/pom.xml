@@ -12,7 +12,7 @@
 
   <artifactId>demo-assembly</artifactId>
   <name>IZPack Demo :: Assembly</name>
-  <packaging>izpack-jar</packaging>
+<!--  <packaging>izpack-jar</packaging> -->
 
   <build>
     <plugins>
@@ -81,6 +81,7 @@
           </execution>
         </executions>
       </plugin>
+<!--
       <plugin>
         <groupId>org.codehaus.izpack</groupId>
         <artifactId>izpack-maven-plugin</artifactId>
@@ -97,6 +98,7 @@
           </execution>
         </executions>
       </plugin>
+-->
     </plugins>
   </build>
 
