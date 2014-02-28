@@ -92,8 +92,6 @@
               <goal>izpack</goal>
             </goals>
             <configuration>
-              <!-- base for relative paths in izpack descriptor -->
-<!--               <baseDir>${izpack.staging}</baseDir> -->
               <classifier>installer</classifier>
             </configuration>
           </execution>
@@ -103,14 +101,6 @@
   </build>
 
   <dependencies>
-<!--     <dependency> -->
-<!--       <groupId>org.codehaus.izpack</groupId> -->
-<!--       <artifactId>izpack-panel</artifactId> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>org.codehaus.izpack</groupId> -->
-<!--       <artifactId>izpack-api</artifactId> -->
-<!--     </dependency> -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>demo-install-routines</artifactId>
