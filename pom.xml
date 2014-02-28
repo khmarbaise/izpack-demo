@@ -15,7 +15,7 @@
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>IZPack :: Root</name>
+	<name>IZPack Demo :: Root</name>
 	<scm>
 		<developerConnection>scm:git:git@github.com:khmarbaise/izpack-demo.git</developerConnection>
 		<connection>scm:git:git@github.com:khmarbaise/izpack-demo.git</connection>
